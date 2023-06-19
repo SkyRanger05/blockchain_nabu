@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^1.5.0;
 
 // Create a customer contract to remit funds to others.
 contract CustomerAccount{
@@ -15,7 +15,7 @@ contract CustomerAccount{
     
     function setInfo(address payable newOwner, address payable newAuthorizedRecepient, bool newAccountStatus, uint newAccountBalance, string memory newCustomerName, string memory newCustomerLastName) public {
         owner = newOwner;
-        authorizedRecepient = new authorizedRecepient;
+        authorizedRecepient = newAuthorizedRecepient;
 	isNewAccount = newAccountStatus;
         accountBalance = newAccountBalance;
         customerName = newCustomerName;
@@ -23,7 +23,7 @@ contract CustomerAccount{
     }
 
     function sendRemittance(uint amount, address payable recepient) public {
-       require(recepient == owner || recepient == authorizedRecipient , "The recepient address is not authorized!")
+       require(recepient == owner || recepient == authorizedRecepient , "The recepient address is not authorized!");
        recepient.transfer(amount);
        accountBalance = address(this).balance;
     }
